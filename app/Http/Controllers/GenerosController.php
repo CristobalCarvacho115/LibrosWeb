@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+
 use App\Models\Genero;
 use App\Http\Requests\GenerosRequest;
-
+use App\Http\Requests\GenerosEditRequest;
 
 class GenerosController extends Controller
 {
@@ -33,7 +33,7 @@ class GenerosController extends Controller
         return view('generos.edit',compact('genero'));
     }
 
-    public function update(Genero $genero, Request $request){
+    public function update(Genero $genero, GenerosEditRequest $request){
         $genero->nombre = $request->nombre;
         $genero->save();
         return redirect()->route('generos.index');

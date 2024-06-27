@@ -10,7 +10,7 @@ return new class extends Migration
     {
         Schema::create('editoriales', function (Blueprint $table) {
             $table->integer('id')->autoIncrement();
-            $table->string('nombre',30);
+            $table->string('nombre',40);
             $table->timestamps();
             $table->softDeletes();
         });

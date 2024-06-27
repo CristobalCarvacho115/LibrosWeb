@@ -40,8 +40,11 @@
                             href="{{route('editoriales.index')}}">Editoriales</a>
                         </li>
                         <li class="nav-item" >
-                            <a class="nav-link @if(Request::segments()[0]=='usuarios') active @endif"
-                            href="{{route('usuarios.index')}}">Usuarios</a>
+                            <a class="nav-link
+                                @if(Auth::user()->rol_id!=1) invisible @endif
+                                @if(Request::segments()[0]=='usuarios') active @endif"
+                                href="{{route('usuarios.index')}}">Usuarios
+                            </a>
                         </li>
                     </ul>
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">

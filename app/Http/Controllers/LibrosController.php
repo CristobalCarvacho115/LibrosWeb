@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Http\Requests\LibrosRequest;
+use App\Http\Requests\LibrosEditRequest;
 use App\Models\Libro;
 use App\Models\Genero;
 use App\Models\Editorial;
@@ -43,7 +43,7 @@ class LibrosController extends Controller
         return view('libros.edit',compact('libro','generos','editoriales'));
     }
 
-    public function update(Libro $libro, Request $request){
+    public function update(Libro $libro, LibrosRequest $request){
         $libro->titulo       = $request->titulo;
         $libro->autor        = $request->autor;
         $libro->editorial_id = $request->editorial_id;

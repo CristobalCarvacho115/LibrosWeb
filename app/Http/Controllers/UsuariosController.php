@@ -8,7 +8,8 @@ use App\Models\Rol;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
-
+use App\Http\Requests\UsuariosRequest;
+use App\Http\Requests\UsuariosEditRequest;
 class UsuariosController extends Controller
 {
 
@@ -19,7 +20,7 @@ class UsuariosController extends Controller
         return view('usuarios.index',compact('usuarios','roles'));
     }
 
-    public function store(Request $request){
+    public function store(UsuariosRequest $request){
         $usuario = new UsuarioB();
         $usuario->email    = $request->email;
         $usuario->password = Hash::make($request->password);
@@ -41,7 +42,7 @@ class UsuariosController extends Controller
         return view('usuarios.edit',compact('usuario','roles'));
     }
 
-    public function update(Usuario $usuario, Request $request){
+    public function update(Usuario $usuario, UsuariosEditRequest $request){
         $usuario->email    = $request->email;
         $usuario->nombre   = $request->nombre;
         $usuario->rol_id   = $request->rol_id;
@@ -65,18 +66,6 @@ class UsuariosController extends Controller
         }else{
             return back()->withErrors('Email o contraseña incorrecta');
         }
-
-        // $credenciales = $request->only('email','password');
-
-        // if (Auth::attempt($credenciales)){
-        //     //credenciales correctas
-        //     $usuario = Usuario::where('email',$request->email)->first();
-        //     $usuario->registrarUltimoLogin();
-        //     return redirect()->route('home.index');
-        // }else{
-        //     //credenciales incorrectas
-        //     return back()->withErrors('Credenciales Incorrectas');
-        // }
     }
 
     public function logout(){

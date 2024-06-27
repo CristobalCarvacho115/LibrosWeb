@@ -11,7 +11,7 @@
 
         <div class="row">
             <!-- equipos -->
-            <div class="col-12 col-md-6 col-lg-6 col-xl-3 mb-3">
+            <div class="col-12 col-md-6 col-lg-6 col-xl-3 mb-3 @if(Auth::user()->rol_id!=1) col-xl-4 @endif">
                 <div class="card">
                     <img class="card-img-top" src="{{ asset('images/libros.jpg') }}">
                     <div class="card-body">
@@ -25,7 +25,7 @@
                 </div>
             </div>
             <!-- estadios -->
-            <div class="col-12 col-md-6 col-lg-6 col-xl-3 mb-3">
+            <div class="col-12 col-md-6 col-lg-6 col-xl-3 mb-3 @if(Auth::user()->rol_id!=1) col-xl-4 @endif">
                 <div class="card">
                     <img class="card-img-top" src="{{ asset('images/genero.jpg') }}">
                     <div class="card-body">
@@ -39,7 +39,7 @@
                 </div>
             </div>
             <!-- estadisticas -->
-            <div class="col-12 col-md-6 col-lg-6 col-xl-3 mb-3">
+            <div class="col-12 col-md-6 col-lg-6 col-xl-3 mb-3 @if(Auth::user()->rol_id!=1) col-xl-4 @endif">
                 <div class="card">
                     <img class="card-img-top" src="{{ asset('images/editorial.jpg') }}">
                     <div class="card-body">
@@ -53,7 +53,7 @@
                 </div>
             </div>
             <!-- jugadores -->
-            <div class="col-12 col-md-6 col-lg-6 col-xl-3 mb-3">
+            <div class="col-12 col-md-6 col-lg-6 col-xl-3 mb-3 @if(Auth::user()->rol_id!=1) invisible @endif">
                 <div class="card">
                     <img class="card-img-top" src="{{ asset('images/usuarios.jpg') }}">
                     <div class="card-body">

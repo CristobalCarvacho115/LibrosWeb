@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Editorial;
 use App\Http\Requests\EditorialesRequest;
+use App\Http\Requests\EditorialesEditRequest;
 
 class EditorialesController extends Controller
 {
@@ -34,10 +34,10 @@ class EditorialesController extends Controller
         return view('editoriales.edit',compact('editorial'));
     }
 
-    public function update(Editorial $editorial, Request $request){
+    public function update(Editorial $editorial, EditorialesEditRequest $request){
         $editorial->nombre = $request->nombre;
         $editorial->save();
-        return redirect()->route('editorial.index');
+        return redirect()->route('editoriales.index');
     }
 
 }
