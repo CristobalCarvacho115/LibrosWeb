@@ -52,6 +52,8 @@ class UsuariosController extends Controller
 
     public function login(Request $request){
 
+        Auth::logout();
+
         $credenciales = [
             'email'=>$request->email,
             'password' =>$request->password,
@@ -59,8 +61,7 @@ class UsuariosController extends Controller
 
         if (Auth::attempt($credenciales)){
             $request->session()->regenerate();
-
-            return redirect()->intended();
+            return redirect()->route('home.index');
         }else{
             return back()->withErrors('Email o contraseña incorrecta');
         }
