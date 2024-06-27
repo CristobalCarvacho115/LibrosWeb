@@ -1,73 +1,55 @@
 @extends('layouts.master')
 
 @section('contenido-principal')
-    <!-- datos -->
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col">
-                <h3>Gestión de Usuarios</h3>
-            </div>
-        </div>
 
-        <div class="row">
-            <!-- tabla -->
-            <div class="col-12 col-lg-9 order-last order-lg-first">
-                <table class="table table-bordered table-striped table-hover">
-                    <thead>
-                        <tr>
-                            <th>Email</th>
-                            <th>Nombre</th>
-                            <th>Rol</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td class="align-middle col-4">{{$usuario->email}}</td>
-                            <td class="align-middle col-col-4">{{$usuario->nombre}}</td>
-                            <td class="align-middle col-2">
-                                {{$usuario->rol!=null?$usuario->rol->nombre_rol:'No definido'}}
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <!-- form agregar -->
-            <div class="col-12 col-lg-3 order-first order-lg-last">
+    <br>
+    <div class="container-fluid mt-100">
+        <div class="row justify-content-center">
+            <div class="col-3 mt-100 align-items-center">
                 <div class="card">
-                    <div class="card-header bg-dark text-white">Agregar Usuario</div>
+                    <div class="card-header ">
+                        <h5>Usuario: {{ $usuario->nombre }}</h5>
+                    </div>
                     <div class="card-body">
-                        @if ($errors->any())
-                        <div class="alert alert-danger">
-                            <p>Por favor solucione los siguientes errores: </p>
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                        @endif
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item"><b>Email: </b>{{ $usuario->email }}</li>
+                            {{-- <li class="list-group-item"><b>Rol: </b>{{ $usuario->usuarios_rol_id}}</li> --}}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-7 justify-content-center">
+                <div class="card">
+                    <div class="card-header">
+                        Editar Usuario
+                    </div>
+                    <div class="card-body">
                         <form method="POST" action="{{route('usuarios.update',$usuario->id)}}">
                             @csrf
+                            @method('put')
                             <div class="mb-3 form-group">
                                 <label for="email" class="form-label">Email</label>
-                                <input type="text" name="email"  id="email" class="form-control" value="{{$usuario->email}}">
+                                <input type="email" name="email"  id="email" class="form-control" value="{{ $usuario->email }}">
                             </div>
-                            <div class="mb-3 form-group" >
+                            {{-- <div class="mb-3 form-group" >
                                 <label for="password" class="form-label">Contraseña</label>
-                                <input type="password" name="password"  id="password" class="form-control">
-                            </div>
+                                <input type="password" name="password"  id="password" class="form-control" value="{{ $usuario->contraseña }}">
+                            </div> --}}
                             <div class="mb-3 form-group" >
                                 <label for="nombre" class="form-label">Nombre</label>
-                                <input type="nombre" name="nombre"  id="nombre" class="form-control" value="{{$usuario->nombre}}">
+                                <input type="text" name="nombre"  id="nombre" class="form-control" value="{{ $usuario->nombre }}">
                             </div>
                             <div class="form-group mb-3">
                                 <label for="rol_id">Rol:</label>
                                 <select name="rol_id" id="rol_id" class="form-control">
                                     @foreach ($roles as $rol)
-                                        <option value="{{$rol->id}}">{{$rol->nombre_rol}}</option>
+                                        <option value="{{$rol->id}}" @if ($usuario->rol_id==$rol->id) selected="selected" @endif>{{$rol->nombre_rol}}</option>
                                     @endforeach
                                 </select>
+                            </div>
+                            <div class="mb-3 d-grid gap-2 d-lg-block">
+                                <button href="{{route('usuarios.index')}}" type=""  class="btn btn-warning">Cancelar</button>
+                                <button type="submit"  class="btn btn-success">Guardar Cambios</button>
                             </div>
                         </form>
                     </div>

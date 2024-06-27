@@ -38,6 +38,19 @@ class LibrosController extends Controller
 
     public function edit(Libro $libro)
     {
-        return view('libros.edit',compact('libro'));
+        $editoriales = Editorial::all();
+        $generos = Genero::all();
+        return view('libros.edit',compact('libro','generos','editoriales'));
+    }
+
+    public function update(Libro $libro, Request $request){
+        $libro->titulo       = $request->titulo;
+        $libro->autor        = $request->autor;
+        $libro->editorial_id = $request->editorial_id;
+        $libro->genero_id    = $request->genero_id;
+        $libro->stock        = $request->stock;
+        $libro->precio       = $request->precio;
+        $libro->save();
+        return redirect()->route('libros.index');
     }
 }

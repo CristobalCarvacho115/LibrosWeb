@@ -6,6 +6,7 @@ use App\Models\Usuario;
 use App\Models\UsuarioB;
 use App\Models\Rol;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 
 class UsuariosController extends Controller
@@ -21,7 +22,7 @@ class UsuariosController extends Controller
     public function store(Request $request){
         $usuario = new UsuarioB();
         $usuario->email    = $request->email;
-        $usuario->password = $request->password;
+        $usuario->password = Hash::make($request->password);
         $usuario->nombre   = $request->nombre;
         $usuario->rol_id   = $request->rol_id;
         $usuario->save();
@@ -40,27 +41,45 @@ class UsuariosController extends Controller
         return view('usuarios.edit',compact('usuario','roles'));
     }
 
-    public function update(){
-
+    public function update(Usuario $usuario, Request $request){
+        $usuario->email    = $request->email;
+        $usuario->nombre   = $request->nombre;
+        $usuario->rol_id   = $request->rol_id;
+        $usuario->save();
+        return redirect()->route('usuarios.index');
     }
 
 
     public function login(Request $request){
-        $credenciales = $request->only('email','password');
+
+        $credenciales = [
+            'email'=>$request->email,
+            'password' =>$request->password,
+        ];
 
         if (Auth::attempt($credenciales)){
-            //credenciales correctas
-            $usuario = Usuario::where('email',$request->email)->first();
-            $usuario->registrarUltimoLogin();
-            return redirect()->route('home.index');
+            $request->session()->regenerate();
+
+            return redirect()->intended();
         }else{
-            //credenciales incorrectas
-            return back()->withErrors('Credenciales Incorrectas');
+            return back()->withErrors('Email o contraseña incorrecta');
         }
+
+        // $credenciales = $request->only('email','password');
+
+        // if (Auth::attempt($credenciales)){
+        //     //credenciales correctas
+        //     $usuario = Usuario::where('email',$request->email)->first();
+        //     $usuario->registrarUltimoLogin();
+        //     return redirect()->route('home.index');
+        // }else{
+        //     //credenciales incorrectas
+        //     return back()->withErrors('Credenciales Incorrectas');
+        // }
     }
 
     public function logout(){
-        return redirect()->route('home.login');
         Auth::logout();
+        return redirect()->route('home.login');
     }
 }

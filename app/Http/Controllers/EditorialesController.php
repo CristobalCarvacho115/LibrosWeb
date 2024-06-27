@@ -11,7 +11,7 @@ class EditorialesController extends Controller
 
     public function index()
     {
-        $editoriales = Editorial::all();
+        $editoriales = Editorial::orderBy('nombre')->get();
 
         return view('editoriales.index',compact('editoriales'));
     }
@@ -32,6 +32,12 @@ class EditorialesController extends Controller
 
     public function edit(Editorial $editorial){
         return view('editoriales.edit',compact('editorial'));
+    }
+
+    public function update(Editorial $editorial, Request $request){
+        $editorial->nombre = $request->nombre;
+        $editorial->save();
+        return redirect()->route('editorial.index');
     }
 
 }

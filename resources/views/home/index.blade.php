@@ -57,7 +57,7 @@
                 <div class="card">
                     <img class="card-img-top" src="{{ asset('images/usuarios.jpg') }}">
                     <div class="card-body">
-                        <h5 class="card-title">Gestionar Cuentas de Trabajadores</h5>
+                        <h5 class="card-title">Gestionar Cuentas</h5>
                         <a href="{{route('usuarios.index')}}">
                             <div class="btn-group d-flex">
                                 <button  class="btn btn-outline-success">Ver</button>

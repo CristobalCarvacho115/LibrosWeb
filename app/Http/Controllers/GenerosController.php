@@ -11,7 +11,7 @@ class GenerosController extends Controller
 {
     public function index()
     {
-        $generos = Genero::all();
+        $generos = Genero::orderBy('nombre')->get();
         return view('generos.index',compact('generos'));
     }
 
@@ -31,5 +31,11 @@ class GenerosController extends Controller
     public function edit(Genero $genero)
     {
         return view('generos.edit',compact('genero'));
+    }
+
+    public function update(Genero $genero, Request $request){
+        $genero->nombre = $request->nombre;
+        $genero->save();
+        return redirect()->route('generos.index');
     }
 }

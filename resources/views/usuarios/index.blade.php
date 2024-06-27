@@ -29,10 +29,9 @@
                             <td class="align-middle col-4">{{$usuario->email}}</td>
                             <td class="align-middle col-col-4">{{$usuario->nombre}}</td>
                             <td class="align-middle col-2">
-                                {{$usuario->rol!=null?$usuario->rol->nombre_rol:'No definido'}}
+                                {{$usuario->rol!=null?$usuario->rol->nombre_rol:'No Asignado'}}
                             </td>
-                            <td class="text-center col-1" style="width: 1rem">
-                                <!--BORRAR -->
+                            <td class="text-center col-1 @if ($usuario->rol_id==1) invisible @endif" style="width: 1rem">
                                 <form method="POST" action="{{route('usuarios.destroy',$usuario->id)}}">
                                     @csrf
                                     @method('delete')
@@ -41,7 +40,7 @@
                                     <span class="material-icons">delete</span></button>
                                 </form>
                             </td>
-                            <td class="text-center col-1" style="width: 1rem">
+                            <td class="text-center col-1 @if ($usuario->rol_id==1) invisible @endif" style="width: 1rem">
                                 <a href="{{route('usuarios.edit',$usuario->id)}}" class="btn btn-sm btn-warning pb-0 text-white" data-bs-toggle="tooltip"
                                     data-bs-title="Editar {{$usuario->nombre}}">
                                     <span class="material-icons">edit</span>
@@ -72,7 +71,7 @@
                             @csrf
                             <div class="mb-3 form-group">
                                 <label for="email" class="form-label">Email</label>
-                                <input type="text" name="email"  id="email" class="form-control">
+                                <input type="email" name="email"  id="email" class="form-control">
                             </div>
                             <div class="mb-3 form-group" >
                                 <label for="password" class="form-label">Contraseña</label>
@@ -80,7 +79,7 @@
                             </div>
                             <div class="mb-3 form-group" >
                                 <label for="nombre" class="form-label">Nombre</label>
-                                <input type="nombre" name="nombre"  id="nombre" class="form-control">
+                                <input type="text" name="nombre"  id="nombre" class="form-control">
                             </div>
                             <div class="form-group mb-3">
                                 <label for="rol_id">Rol:</label>
@@ -89,6 +88,10 @@
                                         <option value="{{$rol->id}}">{{$rol->nombre_rol}}</option>
                                     @endforeach
                                 </select>
+                            </div>
+                            <div class="mb-3 d-grid gap-2 d-lg-block">
+                                <button type="reset"  class="btn btn-warning">Cancelar</button>
+                                <button type="submit"  class="btn btn-success">Agregar Usuario</button>
                             </div>
                         </form>
                     </div>

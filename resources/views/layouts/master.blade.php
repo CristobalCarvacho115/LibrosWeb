@@ -24,23 +24,23 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav col-11 me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link @if(Route::current()->getName()=='home.index') active @endif"
+                            <a class="nav-link @if(Request::segments()[0]=='home') active @endif"
                             aria-current="page" href="{{route('home.index')}}">Inicio</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link @if(Route::current()->getName()=='libros.index') active @endif"
+                            <a class="nav-link @if(Request::segments()[0]=='libros') active @endif"
                             href="{{route('libros.index')}}">Libros</a>
                         </li>
                         <li class="nav-item" >
-                            <a class="nav-link @if(Route::current()->getName()=='generos.index') active @endif"
+                            <a class="nav-link @if(Request::segments()[0]=='generos') active @endif"
                             href="{{route('generos.index')}}">Generos</a>
                         </li>
                         <li class="nav-item" >
-                            <a class="nav-link @if(Route::current()->getName()=='editoriales.index') active @endif"
+                            <a class="nav-link @if(Request::segments()[0]=='editoriales') active @endif"
                             href="{{route('editoriales.index')}}">Editoriales</a>
                         </li>
                         <li class="nav-item" >
-                            <a class="nav-link @if(Route::current()->getName()=='usuarios.index') active @endif"
+                            <a class="nav-link @if(Request::segments()[0]=='usuarios') active @endif"
                             href="{{route('usuarios.index')}}">Usuarios</a>
                         </li>
                     </ul>
