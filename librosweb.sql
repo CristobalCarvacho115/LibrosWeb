@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 26-06-2024 a las 09:32:03
+-- Tiempo de generación: 28-06-2024 a las 05:32:30
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -53,7 +53,7 @@ CREATE TABLE `cache_locks` (
 
 CREATE TABLE `editoriales` (
   `id` int(11) NOT NULL,
-  `nombre` varchar(30) NOT NULL,
+  `nombre` varchar(40) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -69,7 +69,9 @@ INSERT INTO `editoriales` (`id`, `nombre`, `created_at`, `updated_at`, `deleted_
 (3, 'La Esfera Azul', '2024-06-26 03:16:07', '2024-06-26 03:16:07', NULL),
 (4, 'ZIG-ZAG', '2024-06-26 03:16:50', '2024-06-26 03:16:50', NULL),
 (5, 'Sudamericana', '2024-06-26 03:17:05', '2024-06-26 03:17:05', NULL),
-(6, 'Salamandra', '2024-06-26 03:17:26', '2024-06-26 03:17:26', NULL);
+(6, 'Salamandra', '2024-06-26 03:17:26', '2024-06-26 03:17:26', NULL),
+(7, 'Penguin Short Classics', '2024-06-27 03:46:07', '2024-06-27 03:46:07', NULL),
+(8, 'AAAA', '2024-06-27 05:06:43', '2024-06-27 05:06:46', '2024-06-27 05:06:46');
 
 -- --------------------------------------------------------
 
@@ -107,11 +109,11 @@ CREATE TABLE `generos` (
 
 INSERT INTO `generos` (`id`, `nombre`, `created_at`, `updated_at`, `deleted_at`) VALUES
 (1, 'Romántico', '2024-06-26 01:50:02', '2024-06-26 01:50:02', NULL),
-(2, 'Ciencia ficción', '2024-06-26 01:50:12', '2024-06-26 01:50:12', NULL),
+(2, 'Ciencia ficción', '2024-06-26 01:50:12', '2024-06-26 22:18:43', NULL),
 (3, 'Aventura', '2024-06-26 01:50:23', '2024-06-26 01:50:23', NULL),
 (4, 'Fantasía', '2024-06-26 01:50:31', '2024-06-26 01:50:31', NULL),
-(5, 'Contemporáneo', '2024-06-26 01:50:40', '2024-06-26 01:50:40', NULL),
-(6, 'Fábula', '2024-06-26 03:17:44', '2024-06-26 03:17:44', NULL),
+(5, 'Contemporáneo', '2024-06-26 01:50:40', '2024-06-27 03:52:03', NULL),
+(6, 'Fábula', '2024-06-26 03:17:44', '2024-06-26 22:24:08', NULL),
 (7, 'Misterio', '2024-06-26 03:17:49', '2024-06-26 03:17:49', NULL);
 
 -- --------------------------------------------------------
@@ -157,8 +159,8 @@ CREATE TABLE `job_batches` (
 
 CREATE TABLE `libros` (
   `id` int(11) NOT NULL,
-  `titulo` varchar(30) NOT NULL,
-  `autor` varchar(30) NOT NULL,
+  `titulo` varchar(50) NOT NULL,
+  `autor` varchar(50) NOT NULL,
   `genero_id` tinyint(4) NOT NULL,
   `editorial_id` int(11) NOT NULL,
   `stock` int(11) NOT NULL,
@@ -291,10 +293,15 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id`, `email`, `password`, `nombre`, `ultimo_login`, `rol_id`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'admin1@gmail.com', '$2y$12$b/DP457px9JDlcc9ipMigOaSqdAQvLJ7jezljTp4a4brfL865eQbC', 'Admin 1', '2024-06-26 06:47:21', 1, NULL, '2024-06-26 06:47:21', NULL),
-(2, 'admin2@gmail.com', '$2y$12$b/DP457px9JDlcc9ipMigOaSqdAQvLJ7jezljTp4a4brfL865eQbC', 'Admin 2', NULL, 1, NULL, NULL, NULL),
+(1, 'admin1@gmail.com', '$2y$12$b/DP457px9JDlcc9ipMigOaSqdAQvLJ7jezljTp4a4brfL865eQbC', 'Admin 1', '2024-06-26 21:33:44', 1, NULL, '2024-06-26 21:52:51', NULL),
+(2, 'admin2@gmail.com', '$2y$12$b/DP457px9JDlcc9ipMigOaSqdAQvLJ7jezljTp4a4brfL865eQbC', 'Admin 2', NULL, 1, NULL, '2024-06-26 21:49:26', NULL),
 (3, 'trabajador1@gmail.com', '$2y$12$NOUbSqCjkgeKyIIRv5asGOca0BsLS4tT9qp.JiauMTScZh2MMVvka', 'Trabajador 1', NULL, 2, NULL, NULL, NULL),
-(4, 'trabajador2@gmail.com', '$2y$12$NOUbSqCjkgeKyIIRv5asGOca0BsLS4tT9qp.JiauMTScZh2MMVvka', 'Trabajador 2', NULL, 2, NULL, NULL, NULL);
+(4, 'trabajador2@gmail.com', '$2y$12$NOUbSqCjkgeKyIIRv5asGOca0BsLS4tT9qp.JiauMTScZh2MMVvka', 'Trabajador 2', NULL, 2, NULL, '2024-06-26 21:53:02', NULL),
+(5, 'trabajador3@gmail.com', '$2y$12$b/DP457px9JDlcc9ipMigOaSqdAQvLJ7jezljTp4a4brfL865eQbC', 'trabajador 3', NULL, 2, '2024-06-26 21:08:22', '2024-06-26 21:08:24', '2024-06-26 21:08:24'),
+(6, 'a@gmail.com', '$2y$12$b/DP457px9JDlcc9ipMigOaSqdAQvLJ7jezljTp4a4brfL865eQbC', 'a', NULL, 2, '2024-06-26 21:15:51', '2024-06-26 21:16:40', '2024-06-26 21:16:40'),
+(8, 'probando@gmail.com', '$2y$12$b/DP457px9JDlcc9ipMigOaSqdAQvLJ7jezljTp4a4brfL865eQbC', 'probando', NULL, 1, NULL, NULL, NULL),
+(9, 'Administrador@gmail.com', '$2y$12$o1TtHRKAi1/7GCHRIWCwk.ILf0Ke/ejyuPaSetNIxBQOBRlQrovO.', 'Admin', NULL, 1, '2024-06-27 05:04:54', '2024-06-27 05:04:54', NULL),
+(10, 'Trabajador@gmail.com', '$2y$12$H3B0EFQQ1hO6AWPVo2TteeSUO5DW8vHvsv8UYeuc9W1ens.fse9Fq', 'Trabajador', NULL, 2, '2024-06-27 05:05:14', '2024-06-27 05:05:14', NULL);
 
 --
 -- Índices para tablas volcadas
@@ -401,7 +408,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `editoriales`
 --
 ALTER TABLE `editoriales`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `failed_jobs`
@@ -449,7 +456,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Restricciones para tablas volcadas
